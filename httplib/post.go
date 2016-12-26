@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 )
@@ -35,7 +36,7 @@ func (req *PostJSONRequest) DoRequest() (response []byte, err error) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode >= 300 {
-		err = errors.New("get invalid response status code")
+		err = fmt.Errorf("get invalid response status code %d", resp.StatusCode)
 		return
 	}
 
